@@ -1,9 +1,12 @@
 package com.github.ekorhenardo.bgpautomation;
 
-import com.github.ekorhenardo.bgpautomation.utils.BaseTest;
-import org.junit.jupiter.api.Test;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 import java.util.regex.Pattern;
+
+import org.junit.jupiter.api.Test;
+
+import com.github.ekorhenardo.bgpautomation.utils.BaseTest;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
