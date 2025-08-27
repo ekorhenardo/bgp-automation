@@ -3,9 +3,7 @@ package com.github.ekorhenardo.bgpautomation;
 import com.github.ekorhenardo.bgpautomation.utils.BaseTest;
 import org.junit.jupiter.api.Test;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-
 import java.util.regex.Pattern;
-
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -59,10 +57,11 @@ public class EligibilitySectionTest extends BaseTest {
 
     @Test
     void testAC5_reloadPersistence() {
+        Locator yesRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Yes"));
+
         for (int i = 0; i < 5; i++) {
-            Locator yesRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Yes")).nth(i);
-            yesRadioButton.click();
-            assertThat(yesRadioButton).isChecked();
+            yesRadioButton.nth(i).click();
+            assertThat(yesRadioButton.nth(i)).isChecked();
         }
         
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save")).click();
@@ -70,8 +69,7 @@ public class EligibilitySectionTest extends BaseTest {
         page.reload();
 
         for (int i = 0; i < 5; i++) {
-            Locator yesRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Yes")).nth(i);
-            assertThat(yesRadioButton).isChecked();
+            assertThat(yesRadioButton.nth(i)).isChecked();
         }
     }
 }
