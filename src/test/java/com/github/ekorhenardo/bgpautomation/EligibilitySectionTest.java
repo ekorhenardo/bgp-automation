@@ -11,6 +11,7 @@ import com.microsoft.playwright.options.AriaRole;
 public class EligibilitySectionTest extends BaseTest {
     @Test
     void testAC1_sectionContainsFiveQuestions() {
+        // Verify the presence of all five questions in the Eligibility section
         assertThat(page.getByText("Is the applicant registered in Singapore?")).isVisible();
         assertThat(page.getByText("Is the applicant's group sales turnover less than or equal to S$100m or is the applicant's group employment size less than or equal to 200?")).isVisible();
         assertThat(page.getByText("Does the applicant have at least 30% local equity?")).isVisible();
@@ -23,6 +24,7 @@ public class EligibilitySectionTest extends BaseTest {
 
     @Test
     void testAC2_questionsRadioButtons() {
+        // Select "Yes" for all five questions and verify the selection
         for (int i = 0; i < 5; i++) {
             Locator yesRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Yes")).nth(i);
             yesRadioButton.click();
@@ -32,6 +34,7 @@ public class EligibilitySectionTest extends BaseTest {
 
     @Test
     void testAC3_warningMessage() {
+        // Select "No" for each question one at a time and verify the warning message
         for (int i = 0; i < 5; i++) {
             Locator noRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^No$"))).nth(i);
             noRadioButton.click();
@@ -46,6 +49,7 @@ public class EligibilitySectionTest extends BaseTest {
 
     @Test
     void testAC4_faqURL() {
+        // Click "No" for the first question and verify the FAQ link opens the correct URL
         page.locator("label").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^No$"))).nth(0).click();
 
         Page popup = page.waitForPopup(() -> {
@@ -56,7 +60,8 @@ public class EligibilitySectionTest extends BaseTest {
     }
 
     @Test
-    void testAC5_reloadPersistence() {
+    void testAC5_saveAndReloadPage() {
+        // Select "Yes" for all five questions, save the form, reload the page, and verify the selections persist
         Locator yesRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Yes"));
 
         for (int i = 0; i < 5; i++) {
