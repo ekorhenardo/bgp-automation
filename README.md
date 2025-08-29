@@ -89,7 +89,7 @@ Note: the command above will run all test cases under **ContactDetailsSectionTes
 
 1. Run Tests to Generate Results
 
-    This creates the allure-results/ folder:
+    This creates the `allure-results/` folder:
 
     ```bash
     mvn clean test
