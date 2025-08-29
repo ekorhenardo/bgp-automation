@@ -31,3 +31,4 @@ target/
 .settings/
 *.iml
 allure-report/
+allure-results/

@@ -1,3 +1,9 @@
+# BGP Automation
+This project automates the testing of the Singapore Goverment's Business Grant Portal (BGP) using Playwright and Java. It includes core test logic for validating key flows, generates Allure reports, and is designed to be extendable with a frontend UI for easier execution and integration.
+
+👉 [View companion project: `bgp-automation-ui`](https://github.com/ekorhenardo/bgp-automation-ui) — a lightweight Spring Boot web interface to trigger tests without using the terminal.
+
+
 ## Tech Stack
 | Tool               | Purpose                        |
 |--------------------|--------------------------------|
@@ -5,7 +11,7 @@
 | JUnit 5            | Test framework                 |
 | Allure             | Test reporting                 |
 | Maven              | Build & dependency management  |
-| Spring Boot (TBD)  | Frontend UI for execution/reporting (planned) |
+| Spring Boot        | Frontend UI for execution/reporting  |
 
 ## Documentation / Justification
 This section explains the flow of how the project was built, along with the reasoning behind each decision.
@@ -29,10 +35,10 @@ After getting the tests running properly, I integrated Allure to generate test r
 
 Allure was a good fit because it’s clean, well-documented, and works nicely with JUnit 5. It also sets the stage for future CI/CD integration.
 
-### 3. Simple Frontend (Planned)
+### 3. Simple Frontend
 A basic **Spring Boot** UI will be added to trigger test execution from a browser — either running all tests or a specific test class. This makes it easier for non-technical users to run the tests without needing the terminal.
 
-Note: At this stage, the UI will only be used to trigger test runs. Displaying the test results on the frontend might be considered later if time allows.
+Note: For now, it won't show test results yet — that might be added later.
 
 ## Project Structure
 The code is organized into:
@@ -78,3 +84,29 @@ mvn clean test
 mvn clean test -Dtest=ContactDetailsSectionTest
 ```
 Note: the command above will run all test cases under **ContactDetailsSectionTest.java** file.
+
+## How to View Allure Reports
+
+1. Run Tests to Generate Results
+
+    This creates the allure-results/ folder:
+
+    ```bash
+    mvn clean test
+    ```
+
+2. Generate the Allure Report
+
+    ```bash
+    allure generate --clean
+    ```
+
+3. Open the Report in Browser
+
+    ```bash
+    allure open
+    ```
+
+## Related Projects
+
+- [bgp-automation-ui](https://github.com/ekorhenardo/bgp-automation-ui): Spring Boot frontend UI to trigger tests from a browser.
